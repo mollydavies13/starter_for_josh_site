@@ -31,7 +31,7 @@
 <link rel="shortcut icon" href="<?php bloginfo('template_directory'); ?>/images/favicon.ico">
 </head>
 <body>
-<header class="container-fluid smallpage-bg">
+<header class="container-fluid" style="background-size:cover; height:40vh; background-image: url(<?php the_field('projectheaderbackgroundimage') ?>);">
     <div class="container">
 
 <nav class="navbar navbar-expand-md navbar-dark">
@@ -42,6 +42,21 @@
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
     <span class="navbar-toggler-icon"></span>
   </button>
+
+  <?php 
+
+wp_nav_menu( array(
+  'theme_location'  => 'primary',
+  'depth'           => 2, // 1 = no dropdowns, 2 = with dropdowns.
+  'container'       => 'div',
+  'container_class' => 'collapse navbar-collapse',
+  'container_id'    => 'bs-example-navbar-collapse-1',
+  'menu_class'      => 'navbar-nav ml-auto',
+  'fallback_cb'     => 'WP_Bootstrap_Navwalker::fallback',
+  'walker'          => new WP_Bootstrap_Navwalker(),
+) );
+
+?>
 
   <!-- Navbar links -->
   <div class="collapse navbar-collapse" id="collapsibleNavbar">
@@ -62,9 +77,9 @@
   </div>
 </nav>
 
-<div class="smallpage-tag">
-<h1 class="smallpage-title">Projects</h1>
-</div>
+<div class="smallpage-tag"><!-- div that holds the content in the middle of the page-->
+<h1 class="smallpage-title"><?php the_field('projectsheadertitle'); ?> </h1>
+              </div><!-- container-->
 </div> <!-- container -->
 <?php wp_head(); ?> <!-- very important that this is added-->
 </header>
